@@ -54,5 +54,5 @@ this_week = overview.loc[
 overview = overview.assign(Start=overview.Start.dt.date, End=overview.End.dt.date)
 
 st.dataframe(
-    overview.style.apply(lambda x: highlight_current(x, this_week), axis=1).hide_index()
+    overview.hide_index().style.apply(lambda x: highlight_current(x, this_week), axis=1)
 )
