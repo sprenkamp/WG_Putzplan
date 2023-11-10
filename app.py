@@ -37,7 +37,7 @@ st.subheader("Putzplan")
 # Parameter
 start = pd.date_range(start="2021-10-11", end=get_future_date("Monday"), freq="W-MON")
 end = pd.date_range(start="2021-10-17", end=get_future_date("Sunday"), freq="W")
-people = ["Tim", "Melissa", "Kilian", "Fran", "Kevin"]
+people = ["Tim", "Melissa", "Kilian", "Luisa", "Fabian"]
 cycles = len(end)
 people_array = np.tile(people, 1000)[:cycles]
 
@@ -54,5 +54,5 @@ this_week = overview.loc[
 overview = overview.assign(Start=overview.Start.dt.date, End=overview.End.dt.date)
 
 st.dataframe(
-    overview.hide_index().style.apply(lambda x: highlight_current(x, this_week), axis=1)
+    overview.style.apply(lambda x: highlight_current(x, this_week), axis=1)
 )
