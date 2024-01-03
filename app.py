@@ -35,9 +35,9 @@ st.title("Grande Terrazza")
 st.subheader("Putzplan")
 
 # Parameter
-start = pd.date_range(start="2021-10-11", end=get_future_date("Monday"), freq="W-MON")
-end = pd.date_range(start="2021-10-17", end=get_future_date("Sunday"), freq="W")
-people = ["Tim", "Melissa", "Kilian", "Luisa", "Fabian"]
+start = pd.date_range(start="2024-01-11", end=get_future_date("Monday"), freq="W-MON")
+end = pd.date_range(start="2024-07-17", end=get_future_date("Sunday"), freq="W")
+people = ["Fabian", "Tim", "Melissa", "Kilian", "Luisa"]
 cycles = len(end)
 people_array = np.tile(people, 1000)[:cycles]
 
