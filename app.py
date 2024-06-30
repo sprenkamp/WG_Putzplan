@@ -18,16 +18,16 @@ def get_future_date(dayname):
     start_date = date.today()
     day_num = start_date.weekday()
     day_num_target = weekdays.index(dayname)
-    days_until = (day_num_target - day_num + 7) % 7  # days until the next target day
+    days_until = 35 + day_num + day_num_target
 
     return start_date + timedelta(days=days_until)
 
 
-def highlight_current(styler, current_date):
-    return [
-        "background-color: #8c4ce8" if row.Start == current_date else ""
-        for row in styler.itertuples()
-    ]
+def highlight_current(styler, date):
+    if styler.Start == date:
+        return ["background-color: #8c4ce8"] * len(styler)
+    else:
+        return ["background-color: black"] * len(styler)
 
 
 # Page setup
@@ -41,15 +41,15 @@ people = ["Fabian", "Tim", "Melissa", "Kilian", "Jonny"]
 cycles = len(end)
 people_array = np.tile(people, 1000)[:cycles]
 
-# Table construction
+# Table contruction
 overview = pd.DataFrame({"Start": start, "End": end, "Verantwortlich": people_array})
 overview = overview.sort_values(by="Start", ascending=False).reset_index(drop=True)
 
 # Table styling
-today = pd.to_datetime(date.today()).date()
+today = pd.to_datetime(date.today())
 this_week = overview.loc[
-    (overview.Start <= today) & (overview.End > today)
-].Start.dt.date.values[0]
+    (overview.Start <= today) & (overview.End >= today)
+].Start.dt.date.values
 
 overview = overview.assign(Start=overview.Start.dt.date, End=overview.End.dt.date)
 
